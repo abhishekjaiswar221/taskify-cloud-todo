@@ -23,7 +23,7 @@ const FormSchema = z.object({
   password: z
     .string()
     .min(1, "Password is required")
-    .max(8, "Password must be 8 characters"),
+    .min(8, "Password must be 8 characters"),
 });
 
 const SignUpForm = () => {
@@ -38,58 +38,58 @@ const SignUpForm = () => {
 
   const onSubmit = () => {
     toast({
-      title: "Scheduled: Catch up",
-      description: "Friday, February 10, 2023 at 5:57 PM",
+      title: "Your are Registered !!!",
+      description: "Your are registered successfully.",
     });
   };
-
+  const formDetails = [
+    {
+      name: "name",
+      label: "Name",
+      type: "text",
+      placeholder: "Enter the name",
+    },
+    {
+      name: "email",
+      label: "Email",
+      placeholder: "Enter the email",
+    },
+    {
+      name: "password",
+      label: "Password",
+      type: "password",
+      placeholder: "Enter the password",
+    },
+  ];
   return (
     <Form {...form}>
-      <form onSubmit={form.handleSubmit(onSubmit)} className="w-2/3 space-y-6">
-        <FormField
-          control={form.control}
-          name="name"
-          render={({ field }) => (
-            <FormItem>
-              <FormLabel>Name</FormLabel>
-              <FormControl>
-                <Input placeholder="Enter your name" {...field} />
-              </FormControl>
-              <FormMessage />
-            </FormItem>
-          )}
-        />
-        <FormField
-          control={form.control}
-          name="email"
-          render={({ field }) => (
-            <FormItem>
-              <FormLabel>Email</FormLabel>
-              <FormControl>
-                <Input placeholder="Enter your email" {...field} />
-              </FormControl>
-              <FormMessage />
-            </FormItem>
-          )}
-        />
-        <FormField
-          control={form.control}
-          name="password"
-          render={({ field }) => (
-            <FormItem>
-              <FormLabel>Password</FormLabel>
-              <FormControl>
-                <Input
-                  type="password"
-                  placeholder="Enter your password"
-                  {...field}
-                />
-              </FormControl>
-              <FormMessage />
-            </FormItem>
-          )}
-        />
-        <Button type="submit">Submit</Button>
+      <form onSubmit={form.handleSubmit(onSubmit)} className="space-y-6">
+        {formDetails.map(({ name, label, type, placeholder }, index) => {
+          return (
+            <FormField
+              key={index}
+              control={form.control}
+              name={name}
+              render={({ field }) => (
+                <FormItem>
+                  <FormLabel>{label}</FormLabel>
+                  <div className="flex">
+                    <FormControl>
+                      <Input type={type} placeholder={placeholder} {...field} />
+                    </FormControl>
+                    <div className="relative flex items-center justify-end">
+                      <FormMessage className="absolute" />
+                    </div>
+                  </div>
+                </FormItem>
+              )}
+            />
+          );
+        })}
+
+        <Button className="w-full" type="submit">
+          Sign Up
+        </Button>
       </form>
     </Form>
   );
