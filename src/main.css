@@ -3,7 +3,7 @@
 @tailwind utilities;
 
 @layer base {
-  :root {
+  /* :root {
     --background: 0 0% 100%;
     --foreground: 240 10% 3.9%;
 
@@ -33,6 +33,38 @@
     --ring: 240 10% 3.9%;
 
     --radius: 0.5rem;
+  } */
+
+  :root {
+    --background: 0 0% 100%;
+    --foreground: 240 7% 3%;
+
+    --card: 0 0% 100%;
+    --card-foreground: 240 7% 3%;
+
+    --popover: 0 0% 100%;
+    --popover-foreground: 240 7% 3%;
+
+    --primary: 95 46% 25%;
+    --primary-foreground: 0 0% 100%;
+
+    --secondary: 240 4% 95%;
+    --secondary-foreground: 240 6% 10%;
+
+    --muted: 240 4% 95%;
+    --muted-foreground: 240 3% 46%;
+
+    --accent: 240 4% 95%;
+    --accent-foreground: 240 6% 10%;
+
+    --destructive: 0 84% 60%;
+    --destructive-foreground: 0 0% 98%;
+
+    --border: 240 6% 90%;
+    --input: 240 6% 90%;
+    --ring: 346 77% 49%;
+
+    --radius: 0.3rem;
   }
 
   .dark {
