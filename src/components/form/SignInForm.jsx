@@ -1,8 +1,8 @@
 "use client";
 
-import { zodResolver } from "@hookform/resolvers/zod";
-import { useForm } from "react-hook-form";
 import { z } from "zod";
+import { useForm } from "react-hook-form";
+import { zodResolver } from "@hookform/resolvers/zod";
 import { Button } from "@/components/ui/button";
 import {
   Form,
@@ -12,8 +12,8 @@ import {
   FormLabel,
   FormMessage,
 } from "@/components/ui/form";
-import { Input } from "../ui/input";
-import { toast } from "../ui/use-toast";
+import { Input } from "@/components/ui/input";
+import { toast } from "@/components/ui/use-toast";
 
 const FormSchema = z.object({
   email: z.string().min(1, "Email is required").email(),
@@ -35,9 +35,10 @@ const SignInForm = () => {
   const onSubmit = () => {
     toast({
       title: "Logged In !!!",
-      description: "Your are logged in successfully.",
+      description: "You're logged in successfully.",
     });
   };
+
   const formDetails = [
     {
       name: "email",
@@ -51,6 +52,7 @@ const SignInForm = () => {
       placeholder: "Enter the password",
     },
   ];
+
   return (
     <Form {...form}>
       <form onSubmit={form.handleSubmit(onSubmit)} className="space-y-6">

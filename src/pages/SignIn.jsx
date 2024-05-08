@@ -15,7 +15,7 @@ const SignIn = () => {
         <div className="flex flex-col items-center justify-center">
           <div className="mb-6 w-80">
             <h2 className="pb-2 text-3xl font-semibold tracking-tight scroll-m-20 first:mt-0">
-              Welcome Back
+              Welcome Back!
             </h2>
             <p className="text-sm">
               Enter your Credentials to access your account

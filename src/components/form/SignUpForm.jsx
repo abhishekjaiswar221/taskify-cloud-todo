@@ -38,8 +38,8 @@ const SignUpForm = () => {
 
   const onSubmit = () => {
     toast({
-      title: "Your are Registered !!!",
-      description: "Your are registered successfully.",
+      title: "You're Registered !!!",
+      description: "You're registered successfully.",
     });
   };
   const formDetails = [

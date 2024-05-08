@@ -10,8 +10,8 @@ const SignUp = () => {
             <h2 className="pb-2 text-3xl font-semibold tracking-tight scroll-m-20 first:mt-0">
               Get Stated Now
             </h2>
-            <p className="text-sm">
-              Enter Email address and choose string password to continue
+            <p className="text-[13.5px] leading-5">
+              Enter Email address and choose strong password to continue
             </p>
           </div>
           <div className="w-80">
