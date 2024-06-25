@@ -1,5 +1,6 @@
 import { Link } from "react-router-dom";
-import { Home, CheckCheck, Check } from "lucide-react";
+import { Check } from "lucide-react";
+import { Button } from "../ui/button";
 
 const HeaderNavigation = () => {
   return (
@@ -15,7 +16,7 @@ const HeaderNavigation = () => {
                 <h1 className="text-2xl font-semibold">Taskify Todo</h1>
               </div>
             </div>
-            <div className="flex items-center justify-start gap-10">
+            {/* <div className="flex items-center justify-start gap-10">
               <li className="flex items-center justify-center gap-2">
                 <div>
                   <Home size={22} strokeWidth={1.5} />
@@ -36,23 +37,21 @@ const HeaderNavigation = () => {
                   </Link>
                 </div>
               </li>
-            </div>
+            </div> */}
             <div className="flex items-center justify-center gap-3">
               <div>
-                <Link
-                  to="sign-in"
-                  className="px-3 py-2 text-white bg-green-600 border border-green-600 rounded-md"
+                <Button
+                  variant="outline"
+                  className="border-[1.5px] text-[#3b5d22] hover:text-[#3b5d22]  border-[#3b5d22]"
+                  asChild
                 >
-                  SignIn
-                </Link>
+                  <Link to="sign-in">Sign In</Link>
+                </Button>
               </div>
               <div>
-                <Link
-                  to="sign-up"
-                  className="px-3 py-2 text-white bg-red-600 rounded-md"
-                >
-                  SignUp
-                </Link>
+                <Button asChild>
+                  <Link to="sign-up">Sign Up</Link>
+                </Button>
               </div>
             </div>
           </ul>
