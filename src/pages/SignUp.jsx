@@ -1,3 +1,4 @@
+import React from "react";
 import SignUpForm from "@/components/form/SignUpForm";
 import SignUpBanner from "@/assets/images/banner.jpg";
 import { Link } from "react-router-dom";

@@ -1,3 +1,5 @@
+import React from "react";
+
 const FooterNavigation = () => {
   return (
     <footer className="flex items-center justify-center h-16 bg-gray-100 border-t border-gray-200">

@@ -1,3 +1,4 @@
+import React from "react";
 import { Trash, ArrowLeft, Check } from "lucide-react";
 import { Button } from "./ui/button";
 

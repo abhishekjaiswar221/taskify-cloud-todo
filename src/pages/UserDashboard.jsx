@@ -1,3 +1,4 @@
+import React from "react";
 import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
 import { Plus, Search } from "lucide-react";
@@ -12,7 +13,7 @@ import {
 
 const UserDashboard = () => {
   return (
-    <div className="flex flex-col gap-3 px-4 py-8 w-full bg-gray-100">
+    <div className="flex flex-col w-full gap-3 px-4 py-8 bg-gray-100">
       <div className="p-2">
         <h3 className="text-2xl font-semibold tracking-tight scroll-m-20">
           My Notes
@@ -105,7 +106,7 @@ const UserDashboard = () => {
         </div>
       </div>
       <div className="sticky bottom-5">
-        <Button className="flex gap-1 h-12 rounded-full">
+        <Button className="flex h-12 gap-1 rounded-full">
           <Plus />
           <Link>Add Note</Link>
         </Button>
