@@ -1,5 +1,4 @@
-"use client";
-
+import React from "react";
 import { zodResolver } from "@hookform/resolvers/zod";
 import { useForm } from "react-hook-form";
 import { z } from "zod";
@@ -38,8 +37,8 @@ const SignUpForm = () => {
 
   const onSubmit = () => {
     toast({
-      title: "Your are Registered !!!",
-      description: "Your are registered successfully.",
+      title: "You're Registered !!!",
+      description: "You're registered successfully.",
     });
   };
   const formDetails = [
