@@ -1,14 +1,14 @@
 import React from "react";
-import SignInForm from "@/components/form/SignInForm";
-import SignUpBanner from "@/assets/images/banner.jpg";
 import { Link } from "react-router-dom";
+import SignInForm from "@/components/form/SignInForm";
+
 const SignIn = () => {
   return (
     <div className="flex items-center justify-center h-screen">
       <div className="hidden lg:w-2/5 lg:block">
         <img
           className="h-screen border border-stone-200 rounded-r-3xl"
-          src={SignUpBanner}
+          src="/images/auth-page-banner.webp"
           alt="SignUpBanner"
         />
       </div>
@@ -18,7 +18,7 @@ const SignIn = () => {
             <h2 className="pb-2 text-3xl font-semibold tracking-tight scroll-m-20 first:mt-0">
               Welcome Back!
             </h2>
-            <p className="text-sm">
+            <p className="text-[13.5px] leading-5 font-medium text-zinc-600">
               Enter your Credentials to access your account
             </p>
           </div>
