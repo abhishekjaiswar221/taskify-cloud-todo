@@ -14,7 +14,7 @@ import { toast } from "../ui/use-toast";
 import { useForm } from "react-hook-form";
 import { Eye, EyeOff } from "lucide-react";
 import { ClipLoader } from "react-spinners";
-import { FormSchema } from "@/lib/form-schema";
+import { SignUpFormSchema } from "@/lib/form-schema";
 import { useNavigate } from "react-router-dom";
 import { Button } from "@/components/ui/button";
 import { zodResolver } from "@hookform/resolvers/zod";
@@ -98,7 +98,7 @@ const SignUpForm = () => {
   };
 
   const form = useForm({
-    resolver: zodResolver(FormSchema),
+    resolver: zodResolver(SignUpFormSchema),
     defaultValues: {
       name: "",
       email: "",

@@ -1,8 +1,4 @@
-import React from "react";
-import { z } from "zod";
-import { useForm } from "react-hook-form";
-import { zodResolver } from "@hookform/resolvers/zod";
-import { Button } from "@/components/ui/button";
+import React, { useState } from "react";
 import {
   Form,
   FormControl,
@@ -11,25 +7,27 @@ import {
   FormLabel,
   FormMessage,
 } from "@/components/ui/form";
+import { useForm } from "react-hook-form";
+import { Eye, EyeOff } from "lucide-react";
 import { Input } from "@/components/ui/input";
+import { Button } from "@/components/ui/button";
 import { toast } from "@/components/ui/use-toast";
-
-const FormSchema = z.object({
-  email: z.string().min(1, "Email is required").email(),
-  password: z
-    .string()
-    .min(1, "Password is required")
-    .min(8, "Password must be 8 characters"),
-});
+import { SignInFormSchema } from "@/lib/form-schema";
+import { zodResolver } from "@hookform/resolvers/zod";
 
 const SignInForm = () => {
   const form = useForm({
-    resolver: zodResolver(FormSchema),
+    resolver: zodResolver(SignInFormSchema),
     defaultValues: {
       email: "",
       password: "",
     },
   });
+
+  const [show, setShow] = useState(false);
+  const handleClick = () => {
+    setShow(!show);
+  };
 
   const onSubmit = () => {
     toast({
@@ -38,51 +36,68 @@ const SignInForm = () => {
     });
   };
 
-  const formDetails = [
-    {
-      name: "email",
-      label: "Email",
-      placeholder: "Enter the email",
-    },
-    {
-      name: "password",
-      label: "Password",
-      type: "password",
-      placeholder: "Enter the password",
-    },
-  ];
-
   return (
-    <Form {...form}>
-      <form onSubmit={form.handleSubmit(onSubmit)} className="space-y-6">
-        {formDetails.map(({ name, label, type, placeholder }, index) => {
-          return (
-            <FormField
-              key={index}
-              control={form.control}
-              name={name}
-              render={({ field }) => (
-                <FormItem>
-                  <FormLabel>{label}</FormLabel>
-                  <div className="flex">
-                    <FormControl>
-                      <Input type={type} placeholder={placeholder} {...field} />
-                    </FormControl>
-                    <div className="relative flex items-center justify-end">
-                      <FormMessage className="absolute" />
+    <div>
+      <Form {...form}>
+        <form onSubmit={form.handleSubmit(onSubmit)}>
+          <FormField
+            control={form.control}
+            name="email"
+            render={({ field }) => (
+              <FormItem className="mb-6">
+                <FormLabel>Email</FormLabel>
+                <FormControl>
+                  <Input
+                    type="email"
+                    placeholder="Enter your email"
+                    {...field}
+                  />
+                </FormControl>
+                <div className="relative">
+                  <FormMessage className="absolute right-0" />
+                </div>
+              </FormItem>
+            )}
+          />
+          <FormField
+            control={form.control}
+            name="password"
+            render={({ field }) => (
+              <FormItem>
+                <FormLabel>Password</FormLabel>
+                <div className="flex">
+                  <FormControl>
+                    <Input
+                      type={show ? "text" : "password"}
+                      placeholder="Enter your password"
+                      {...field}
+                    />
+                  </FormControl>
+                  <div className="relative">
+                    <div
+                      onClick={handleClick}
+                      className="absolute cursor-pointer top-[10px] right-3"
+                    >
+                      {show ? (
+                        <Eye className="w-4 h-4" />
+                      ) : (
+                        <EyeOff className="w-4 h-4" />
+                      )}
                     </div>
                   </div>
-                </FormItem>
-              )}
-            />
-          );
-        })}
-
-        <Button className="w-full" type="submit">
-          Sign In
-        </Button>
-      </form>
-    </Form>
+                </div>
+                <div className="relative">
+                  <FormMessage className="absolute right-0" />
+                </div>
+              </FormItem>
+            )}
+          />
+          <Button className="w-full mt-10" type="submit">
+            Sign In
+          </Button>
+        </form>
+      </Form>
+    </div>
   );
 };
 
