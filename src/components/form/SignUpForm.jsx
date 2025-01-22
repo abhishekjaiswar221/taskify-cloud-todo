@@ -13,6 +13,7 @@ import { Input } from "../ui/input";
 import { toast } from "../ui/use-toast";
 import { useForm } from "react-hook-form";
 import { Eye, EyeOff } from "lucide-react";
+import { ClipLoader } from "react-spinners";
 import { FormSchema } from "@/lib/form-schema";
 import { useNavigate } from "react-router-dom";
 import { Button } from "@/components/ui/button";
@@ -20,6 +21,7 @@ import { zodResolver } from "@hookform/resolvers/zod";
 
 const SignUpForm = () => {
   const navigate = useNavigate();
+  const [loading, setLoading] = useState(false);
   const [userCredentials, setUserCredentials] = useState({
     name: "",
     email: "",
@@ -39,6 +41,7 @@ const SignUpForm = () => {
    * @returns {Promise<void>}
    */
   const onSubmit = async () => {
+    setLoading(true);
     const { name, email, password } = userCredentials;
     try {
       const response = await axios.post(
@@ -49,7 +52,7 @@ const SignUpForm = () => {
           password: password,
         }
       );
-
+      setLoading(false);
       if (response.data.success) {
         // Save the auth token of the user in the session storage
         sessionStorage.setItem("authToken", response.data.authToken);
@@ -75,8 +78,10 @@ const SignUpForm = () => {
         title: "A user with this email already exists",
         description: "Please sign in to continue",
       });
-      // Navigate to sign-in page
-      navigate("/sign-in");
+      setTimeout(() => {
+        // Navigate to sign-in page
+        navigate("/sign-in");
+      }, 2000);
     }
   };
 
@@ -159,16 +164,16 @@ const SignUpForm = () => {
                     />
                   </FormControl>
                   <div className="relative">
-                    <button
+                    <div
                       onClick={handleClick}
-                      className="absolute top-[10px] right-3"
+                      className="absolute cursor-pointer top-[10px] right-3"
                     >
                       {show ? (
                         <Eye className="w-4 h-4" />
                       ) : (
                         <EyeOff className="w-4 h-4" />
                       )}
-                    </button>
+                    </div>
                   </div>
                 </div>
                 <div className="relative">
@@ -177,8 +182,18 @@ const SignUpForm = () => {
               </FormItem>
             )}
           />
-          <Button className="w-full mt-10" type="submit">
-            Sign Up
+          <Button disabled={loading} className="w-full mt-10" type="submit">
+            {loading ? (
+              <ClipLoader
+                color={"#ffffff"}
+                loading={loading}
+                size={20}
+                aria-label="Loading Spinner"
+                data-testid="loader"
+              />
+            ) : (
+              "Sign Up"
+            )}
           </Button>
         </form>
       </Form>
