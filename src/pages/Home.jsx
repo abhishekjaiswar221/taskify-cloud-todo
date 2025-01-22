@@ -1,6 +1,6 @@
 import React from "react";
 // import FooterNavigation from "@/components/layouts/FooterNavigation";
-import HeaderNavigation from "@/components/layouts/HeaderNavigation";
+import HeaderNavigation from "@/components/navigation/HeaderNavigation";
 // import heroBanner from "@/assets/images/user-dashboard.png";
 import { Button } from "@/components/ui/button";
 import { Link } from "react-router-dom";
