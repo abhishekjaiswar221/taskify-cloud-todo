@@ -1,7 +1,7 @@
 import React from "react";
-import SignUpForm from "@/components/form/SignUpForm";
-import SignUpBanner from "@/assets/images/banner.jpg";
 import { Link } from "react-router-dom";
+import SignUpForm from "@/components/form/SignUpForm";
+
 const SignUp = () => {
   return (
     <div className="flex items-center justify-center h-screen">
@@ -11,7 +11,7 @@ const SignUp = () => {
             <h2 className="pb-2 text-3xl font-semibold tracking-tight scroll-m-20 first:mt-0">
               Get Stated Now
             </h2>
-            <p className="text-[13.5px] leading-5">
+            <p className="text-[13.5px] leading-5 font-medium text-zinc-600">
               Enter Email address and choose strong password to continue
             </p>
           </div>
@@ -36,7 +36,7 @@ const SignUp = () => {
       <div className="hidden lg:block lg:w-2/5">
         <img
           className="h-screen border border-stone-200 rounded-l-3xl"
-          src={SignUpBanner}
+          src="/images/auth-page-banner.webp"
           alt="SignUpBanner"
         />
       </div>
