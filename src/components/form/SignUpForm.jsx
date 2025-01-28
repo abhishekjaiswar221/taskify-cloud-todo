@@ -7,7 +7,6 @@ import {
   FormLabel,
   FormMessage,
 } from "@/components/ui/form";
-import axios from "axios";
 import { Input } from "../ui/input";
 import { toast } from "../ui/use-toast";
 import { useForm } from "react-hook-form";
@@ -20,9 +19,10 @@ import { zodResolver } from "@hookform/resolvers/zod";
 
 const SignUpForm = () => {
   const navigate = useNavigate();
+  // Loading state
   const [loading, setLoading] = useState(false);
-  const [show, setShow] = useState(false);
   // Show Password
+  const [show, setShow] = useState(false);
   const handleClick = () => setShow(!show);
 
   const form = useForm({
@@ -38,44 +38,51 @@ const SignUpForm = () => {
   const onSubmit = async (data) => {
     setLoading(true);
     try {
-      const response = await axios.post(
+      const response = await fetch(
         `${import.meta.env.VITE_BASE_URL}/api/auth/sign-up`,
-        data
+        {
+          method: "POST",
+          headers: {
+            "Content-Type": "application/json",
+          },
+          body: JSON.stringify(data),
+        }
       );
+      const jsonData = await response.json();
       setLoading(false);
-      if (response.data.success) {
+      if (jsonData.success) {
         // Save the auth token of the user in the session storage
-        sessionStorage.setItem("authToken", response.data.authToken);
-        // Navigate to the sign in page
-        setTimeout(() => {
-          // Navigate to sign-in page
-          navigate("/sign-in");
-        }, 1000);
+        sessionStorage.setItem("authToken", jsonData.authToken);
         // Display a toast when the user is registered successfully
         toast({
           title: "You're Registered Successfully !!",
           description: "Please sign in to continue",
         });
+        // Navigate to the sign in page
+        setTimeout(() => {
+          navigate("/sign-in");
+        }, 1000);
+      } else {
+        // Display a toast if the user already exist
+        toast({
+          title: "A user with this email already exists !!",
+          description: "Please sign in to continue",
+        });
+        // Navigate to sign-in page
+        setTimeout(() => {
+          navigate("/sign-in");
+        }, 1000);
       }
     } catch (error) {
       setLoading(false);
-      if (error.response) {
-        console.log("Error:", error.response.data);
-        console.log("Status:", error.response.status);
-      } else if (error.request) {
-        console.log("Error:", error.request);
-      } else {
-        console.log("Error:", error.error);
-      }
-      // Display a toast if the user already exist
+      // Catch errors in the request or response
+      console.error("Error during sign-up:", error);
       toast({
-        title: "A user with this email already exists !!",
-        description: "Please sign in to continue",
+        variant: "destructive",
+        title: "Internal Server Error",
+        description:
+          "There was an error signing you up. Please try again later.",
       });
-      setTimeout(() => {
-        // Navigate to sign-in page
-        navigate("/sign-in");
-      }, 1000);
     }
   };
 
