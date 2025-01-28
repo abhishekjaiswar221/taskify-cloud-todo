@@ -1,4 +1,3 @@
-// Add react spinner and loading bar
 import React, { useState } from "react";
 import {
   Form,
@@ -57,7 +56,10 @@ const SignUpForm = () => {
         // Save the auth token of the user in the session storage
         sessionStorage.setItem("authToken", response.data.authToken);
         // Navigate to the sign in page
-        navigate("/sign-in");
+        setTimeout(() => {
+          // Navigate to sign-in page
+          navigate("/sign-in");
+        }, 1000);
         // Display a toast when the user is registered successfully
         toast({
           title: "You're Registered Successfully !!",
@@ -75,13 +77,13 @@ const SignUpForm = () => {
       }
       // Display a toast if the user already exist
       toast({
-        title: "A user with this email already exists",
+        title: "A user with this email already exists !!",
         description: "Please sign in to continue",
       });
       setTimeout(() => {
         // Navigate to sign-in page
         navigate("/sign-in");
-      }, 2000);
+      }, 1000);
     }
   };
 
@@ -187,7 +189,7 @@ const SignUpForm = () => {
               <ClipLoader
                 color={"#ffffff"}
                 loading={loading}
-                size={20}
+                size={18}
                 aria-label="Loading Spinner"
                 data-testid="loader"
               />
