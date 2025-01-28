@@ -13,43 +13,34 @@ import { toast } from "../ui/use-toast";
 import { useForm } from "react-hook-form";
 import { Eye, EyeOff } from "lucide-react";
 import { ClipLoader } from "react-spinners";
-import { SignUpFormSchema } from "@/lib/form-schema";
 import { useNavigate } from "react-router-dom";
 import { Button } from "@/components/ui/button";
+import { SignUpFormSchema } from "@/lib/form-schema";
 import { zodResolver } from "@hookform/resolvers/zod";
 
 const SignUpForm = () => {
   const navigate = useNavigate();
   const [loading, setLoading] = useState(false);
-  const [userCredentials, setUserCredentials] = useState({
-    name: "",
-    email: "",
-    password: "",
+  const [show, setShow] = useState(false);
+  // Show Password
+  const handleClick = () => setShow(!show);
+
+  const form = useForm({
+    resolver: zodResolver(SignUpFormSchema),
+    defaultValues: {
+      name: "",
+      email: "",
+      password: "",
+    },
   });
 
-  /**
-   * Handles the form submission for user sign-up.
-   * Sends a POST request to the sign-up API endpoint with user credentials.
-   * On successful registration, stores the authentication token in session storage,
-   * navigates to the sign-in page, and displays a success toast message.
-   * If an error occurs, logs the error details, displays an error toast message,
-   * and navigates to the sign-in page.
-   *
-   * @async
-   * @function onSubmit
-   * @returns {Promise<void>}
-   */
-  const onSubmit = async () => {
+  // Submit the form
+  const onSubmit = async (data) => {
     setLoading(true);
-    const { name, email, password } = userCredentials;
     try {
       const response = await axios.post(
         `${import.meta.env.VITE_BASE_URL}/api/auth/sign-up`,
-        {
-          name: name,
-          email: email,
-          password: password,
-        }
+        data
       );
       setLoading(false);
       if (response.data.success) {
@@ -67,6 +58,7 @@ const SignUpForm = () => {
         });
       }
     } catch (error) {
+      setLoading(false);
       if (error.response) {
         console.log("Error:", error.response.data);
         console.log("Status:", error.response.status);
@@ -87,27 +79,6 @@ const SignUpForm = () => {
     }
   };
 
-  const handleChange = (e) => {
-    setUserCredentials({
-      ...userCredentials,
-      [e.target.name]: e.target.value,
-    });
-  };
-
-  const [show, setShow] = useState(false);
-  const handleClick = () => {
-    setShow(!show);
-  };
-
-  const form = useForm({
-    resolver: zodResolver(SignUpFormSchema),
-    defaultValues: {
-      name: "",
-      email: "",
-      password: "",
-    },
-  });
-
   const formDetails = [
     {
       name: "name",
@@ -121,6 +92,7 @@ const SignUpForm = () => {
       placeholder: "Enter your email",
     },
   ];
+
   return (
     <div>
       <Form {...form}>
@@ -135,12 +107,7 @@ const SignUpForm = () => {
                   <FormItem className="mb-6">
                     <FormLabel>{label}</FormLabel>
                     <FormControl>
-                      <Input
-                        onChangeCapture={handleChange}
-                        type={type}
-                        placeholder={placeholder}
-                        {...field}
-                      />
+                      <Input type={type} placeholder={placeholder} {...field} />
                     </FormControl>
                     <div className="relative">
                       <FormMessage className="absolute right-0" />
@@ -159,7 +126,6 @@ const SignUpForm = () => {
                 <div className="flex">
                   <FormControl>
                     <Input
-                      onChangeCapture={handleChange}
                       type={show ? "text" : "password"}
                       placeholder="Enter your password"
                       {...field}
