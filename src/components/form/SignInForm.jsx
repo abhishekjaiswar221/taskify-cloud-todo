@@ -1,5 +1,4 @@
 import React, { useState } from "react";
-import axios from "axios";
 import {
   Form,
   FormControl,
@@ -10,6 +9,7 @@ import {
 } from "@/components/ui/form";
 import { useForm } from "react-hook-form";
 import { Eye, EyeOff } from "lucide-react";
+import { ClipLoader } from "react-spinners";
 import { Input } from "@/components/ui/input";
 import { useNavigate } from "react-router-dom";
 import { Button } from "@/components/ui/button";
@@ -22,6 +22,8 @@ const SignInForm = () => {
   // Show password
   const [show, setShow] = useState(false);
   const handleClick = () => setShow(!show);
+  // Loading state
+  const [loading, setLoading] = useState(false);
 
   const form = useForm({
     resolver: zodResolver(SignInFormSchema),
@@ -33,22 +35,48 @@ const SignInForm = () => {
 
   // Submit the form
   const onSubmit = async (data) => {
-    const response = await axios.post(
-      `${import.meta.env.VITE_BASE_URL}/api/auth/sign-in`,
-      data
-    );
-    if (response.data.success) {
-      //Save the authToken and redirect
-      localStorage.setItem("authToken", response.data.authToken);
+    setLoading(true);
+    try {
+      const response = await fetch(
+        `${import.meta.env.VITE_BASE_URL}/api/auth/sign-in`,
+        {
+          method: "POST",
+          headers: {
+            "Content-Type": "application/json",
+          },
+          body: JSON.stringify(data),
+        }
+      );
+      const jsonData = await response.json();
+      // Check if the response is successful
+      setLoading(false);
+      if (jsonData.success) {
+        // Save the authToken and redirect
+        localStorage.setItem("authToken", jsonData.authToken);
+        // Show a toast message after login successful
+        toast({
+          title: "Logged In !!!",
+          description: "You're logged in successfully.",
+        });
+        // Navigate to user dashboard
+        navigate("/user-dashboard");
+      } else {
+        // Handle invalid credentials
+        toast({
+          variant: "destructive",
+          title: "Invalid Details !!!",
+          description: "Please enter the correct credentials.",
+        });
+      }
+    } catch (error) {
+      setLoading(false);
+      // Catch errors in the request or response
+      console.error("Error during sign-in:", error);
       toast({
-        title: "Logged In !!!",
-        description: "You're logged in successfully.",
-      });
-      navigate("/user-dashboard");
-    } else {
-      toast({
-        title: "Invalid Details !!!",
-        description: "Please enter the correct credentials.",
+        variant: "destructive",
+        title: "Internal Server Error",
+        description:
+          "There was an error signing you in. Please try again later.",
       });
     }
   };
@@ -109,8 +137,18 @@ const SignInForm = () => {
               </FormItem>
             )}
           />
-          <Button className="w-full mt-10" type="submit">
-            Sign In
+          <Button disabled={loading} className="w-full mt-10" type="submit">
+            {loading ? (
+              <ClipLoader
+                color={"#ffffff"}
+                loading={loading}
+                size={18}
+                aria-label="Loading Spinner"
+                data-testid="loader"
+              />
+            ) : (
+              "Sign In"
+            )}
           </Button>
         </form>
       </Form>
