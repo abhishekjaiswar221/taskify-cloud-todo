@@ -55,7 +55,7 @@ const SignInForm = () => {
         localStorage.setItem("authToken", jsonData.authToken);
         // Show a toast message after login successful
         toast({
-          title: "Logged In !!!",
+          title: "Logged In !!",
           description: "You're logged in successfully.",
         });
         // Navigate to user dashboard
@@ -64,7 +64,7 @@ const SignInForm = () => {
         // Handle invalid credentials
         toast({
           variant: "destructive",
-          title: "Invalid Details !!!",
+          title: "Invalid Details !!",
           description: "Please enter the correct credentials.",
         });
       }
@@ -74,7 +74,7 @@ const SignInForm = () => {
       console.error("Error during sign-in:", error);
       toast({
         variant: "destructive",
-        title: "Internal Server Error",
+        title: "Internal Server Error !!",
         description:
           "There was an error signing you in. Please try again later.",
       });

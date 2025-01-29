@@ -56,7 +56,7 @@ const SignUpForm = () => {
         // Display a toast when the user is registered successfully
         toast({
           title: "You're Registered Successfully !!",
-          description: "Please sign in to continue",
+          description: "Please sign in to continue.",
         });
         // Navigate to the sign in page
         setTimeout(() => {
@@ -66,7 +66,7 @@ const SignUpForm = () => {
         // Display a toast if the user already exist
         toast({
           title: "A user with this email already exists !!",
-          description: "Please sign in to continue",
+          description: "Please sign in to continue.",
         });
         // Navigate to sign-in page
         setTimeout(() => {
@@ -79,7 +79,7 @@ const SignUpForm = () => {
       console.error("Error during sign-up:", error);
       toast({
         variant: "destructive",
-        title: "Internal Server Error",
+        title: "Internal Server Error !!",
         description:
           "There was an error signing you up. Please try again later.",
       });
