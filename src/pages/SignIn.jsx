@@ -9,7 +9,7 @@ const SignIn = () => {
         <img
           className="h-screen border border-stone-200 rounded-r-3xl"
           src="/images/auth-page-banner.webp"
-          alt="SignUpBanner"
+          alt="SignInBanner"
         />
       </div>
       <div className="flex items-center justify-center w-full lg:w-3/5">
