@@ -4,7 +4,7 @@ import { Textarea } from "@/components/ui/textarea";
 import { Button } from "@/components/ui/button";
 import HeaderNavigation from "@/components/navigation/HeaderNavigation";
 import FooterNavigation from "@/components/navigation/FooterNavigation";
-import { PlusCircle, Tag } from "lucide-react";
+import { Plus, Tag } from "lucide-react";
 import {
   Select,
   SelectContent,
@@ -106,7 +106,7 @@ const UserDashboard = () => {
               onClick={handleAddNote}
               className="w-full h-10 flex items-center justify-center gap-2 text-white text-base font-medium shadow-md rounded-xl bg-[#3b5d22] hover:bg-[#35511f]"
             >
-              <PlusCircle className="w-5 h-5" />
+              <Plus className="w-5 h-5" />
               Add Note
             </Button>
           </div>

@@ -55,7 +55,7 @@ const Home = () => {
 
         <div className="grid gap-10 md:grid-cols-3">
           {/* Feature 1 */}
-          <div className="p-6 text-center transition shadow-sm bg-gray-50 rounded-xl hover:shadow-md">
+          <div className="p-6 text-center transition shadow-sm cursor-pointer bg-gray-50 rounded-xl hover:shadow-md">
             <div className="mb-3 text-4xl">⚡</div>
             <h3 className="mb-2 text-xl font-semibold text-gray-800">
               Fast & Intuitive
@@ -67,7 +67,7 @@ const Home = () => {
           </div>
 
           {/* Feature 2 */}
-          <div className="p-6 text-center transition shadow-sm bg-gray-50 rounded-xl hover:shadow-md">
+          <div className="p-6 text-center transition shadow-sm cursor-pointer bg-gray-50 rounded-xl hover:shadow-md">
             <div className="mb-3 text-4xl">🌐</div>
             <h3 className="mb-2 text-xl font-semibold text-gray-800">
               Sync Everywhere
@@ -78,7 +78,7 @@ const Home = () => {
           </div>
 
           {/* Feature 3 */}
-          <div className="p-6 text-center transition shadow-sm bg-gray-50 rounded-xl hover:shadow-md">
+          <div className="p-6 text-center transition shadow-sm cursor-pointer bg-gray-50 rounded-xl hover:shadow-md">
             <div className="mb-3 text-4xl">🔒</div>
             <h3 className="mb-2 text-xl font-semibold text-gray-800">
               Secure & Private
