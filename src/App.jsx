@@ -7,7 +7,7 @@ import AddNote from "./components/AddNote";
 import NextTopLoader from "nextjs-toploader";
 import NoteItem from "./components/NoteItem";
 import UserDashboard from "@/pages/UserDashboard";
-import ErrorPage from "./components/ErrorPage";
+import PageNotFound from "./components/PageNotFound.jsx";
 
 const App = () => {
   return (
@@ -35,7 +35,7 @@ const App = () => {
           <Route path="/add-note" element={<AddNote />} />
           <Route path="/sign-up" element={<SignUp />} />
           <Route path="/sign-in" element={<SignIn />} />
-          <Route path="*" element={<ErrorPage />} />
+          <Route path="*" element={<PageNotFound />} />
         </Routes>
       </div>
     </>

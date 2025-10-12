@@ -33,7 +33,7 @@ const SignUp = () => {
           </div>
         </div>
       </div>
-      <div className="hidden lg:block lg:w-2/5">
+      <div className="hidden ml-12 lg:block lg:w-2/5">
         <img
           className="h-screen border border-stone-200 rounded-l-3xl"
           src="/images/auth-page-banner.webp"

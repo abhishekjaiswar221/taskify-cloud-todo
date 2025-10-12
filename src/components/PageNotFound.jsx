@@ -1,7 +1,7 @@
 import React from "react";
 import { Link } from "react-router-dom";
 
-const ErrorPage = () => {
+const PageNotFound = () => {
   return (
     <div className="relative flex items-center justify-center min-h-screen px-6 overflow-hidden bg-white">
       <div className="relative z-20 max-w-xl text-center">
@@ -35,4 +35,4 @@ const ErrorPage = () => {
   );
 };
 
-export default ErrorPage;
+export default PageNotFound;

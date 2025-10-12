@@ -39,7 +39,7 @@ const SignUpForm = () => {
     setLoading(true);
     try {
       const response = await fetch(
-        `${import.meta.env.VITE_BASE_URL}/api/auth/sign-up`,
+        `${import.meta.env.VITE_API_BASE_URL}/api/auth/sign-up`,
         {
           method: "POST",
           headers: {
